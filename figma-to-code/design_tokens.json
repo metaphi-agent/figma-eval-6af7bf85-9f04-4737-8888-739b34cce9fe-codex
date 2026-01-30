@@ -1,0 +1,19 @@
+{
+  "page": "Design",
+  "frame": "Dashboard Design",
+  "node_id": "8121:62",
+  "notes": {
+    "layout": "Left sidebar + topbar; main grid of cards (2 columns top row, 3 cards second row, 3 cards third row)",
+    "bg": "#FAFBFC-ish"
+  },
+  "tokens": {
+    "--color-bg": "#FAFBFC",
+    "--color-surface": "#FFFFFF",
+    "--color-text": "#151D48",
+    "--color-muted": "#737791",
+    "--color-border": "#EEF0F4",
+    "--color-input": "#F9FAFB",
+    "--color-primary": "#5D5FEF",
+    "--shadow-soft": "0 20px 50px rgba(55, 69, 87, 0.10)"
+  }
+}

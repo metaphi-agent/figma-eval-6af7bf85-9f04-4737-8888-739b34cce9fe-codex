@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+npm-debug.log*
+*.tsbuildinfo
+transcript.jsonl
+figma-to-code/exports
+ground_truth/*.png

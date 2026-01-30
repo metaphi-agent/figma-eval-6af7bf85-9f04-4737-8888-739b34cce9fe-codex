@@ -1,2 +1,16 @@
-# figma-eval-6af7bf85-9f04-4737-8888-739b34cce9fe-codex
-Figma to code: Sales Dashboard Design
+# Sales Dashboard (Figma → React)
+
+Production React + Vite + Tailwind v4 implementation of the **Sales Dashboard Design** Figma file.
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
