@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.figma/
+*.log
+.DS_Store
+transcript.jsonl

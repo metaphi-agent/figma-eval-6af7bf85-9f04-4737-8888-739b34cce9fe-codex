@@ -1,0 +1,37 @@
+{
+  "source": {
+    "figma_file_key": "rQRkgSps2QHY5QHqkSsLAT",
+    "frame_node_id": "8121:62",
+    "frame_name": "Dashboard Design"
+  },
+  "font": {
+    "family": "Poppins",
+    "weights": [400, 500, 600]
+  },
+  "colors": {
+    "bg": "#fafbfc",
+    "surface": "#ffffff",
+    "border": "#f8f9fb",
+    "text": "#151d48",
+    "muted": "#737791",
+    "primary": "#5d5ff0",
+    "metric": {
+      "sales_bg": "#ffe2e5",
+      "sales_icon": "#fa5a7d",
+      "order_bg": "#fff4de",
+      "order_icon": "#ff947a",
+      "product_bg": "#dcfce7",
+      "product_icon": "#3cd856",
+      "customers_bg": "#f3e8ff",
+      "customers_icon": "#bf83ff"
+    }
+  },
+  "radii": {
+    "card": 20,
+    "control": 16
+  },
+  "shadows": {
+    "card": "0 4px 20px rgba(238, 238, 238, 0.5)"
+  }
+}
+

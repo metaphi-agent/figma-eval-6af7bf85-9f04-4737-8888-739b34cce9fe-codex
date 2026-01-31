@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Colors (extracted from Figma) */
+  --color-bg: #fafbfc; /* 0.9804, 0.9843, 0.9882 */
+  --color-surface: #ffffff;
+  --color-border: #f8f9fb; /* 0.9725, 0.9765, 0.9804 */
+  --color-text: #151d48; /* 0.0824, 0.1137, 0.2824 */
+  --color-muted: #737791; /* 0.4510, 0.4667, 0.5686 */
+  --color-primary: #5d5ff0; /* 0.3647, 0.3725, 0.9373 */
+  --color-danger: #eb5757; /* close to "State Colors/Error" */
+  --color-success: #22c55e; /* supporting green */
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(238, 238, 238, 0.5);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
