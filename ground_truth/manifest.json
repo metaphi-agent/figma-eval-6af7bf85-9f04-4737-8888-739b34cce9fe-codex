@@ -3,11 +3,10 @@
   "total_frames": 1,
   "frames": [
     {
-      "name": "Dashboard Design",
+      "name": "Dashboard",
       "node_id": "8121:62",
       "gt_image": "8121-62.png",
       "target_route": "/"
     }
   ]
 }
-

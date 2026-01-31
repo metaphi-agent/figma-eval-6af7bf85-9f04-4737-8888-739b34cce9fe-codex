@@ -7,40 +7,18 @@ description: Convert Figma designs to production-ready frontend code.
 
 Convert Figma designs to production React code with Tailwind v4.
 
-## Step 0: Check Manifest & Log Progress
-
-Read `{project_root}/manifest.json` if it exists. It shows completed steps and URLs from prior runs. Resume from where you left off.
-
-**Manifest structure (flat JSON):**
-```json
-{
-  "preview_url": "https://...",
-  "deployed_url": "https://...",
-  "github_repo_url": "https://...",
-  "completed_steps": [
-    "Step 1: Extract from Figma",
-    "Step 2: Export Ground Truth",
-    "Step 3: Visual Analysis",
-    "Step 4: Component & Interaction Audit",
-    "Step 5: Scaffold Project",
-    "Step 6: Generate Components",
-    "Step 7: Deploy & Push"
-  ],
-  "updated_at": "2026-01-31T..."
-}
-```
-
-**Log your progress** after completing each step:
+## Step 0: Check Manifest
 
 ```bash
-# Record URLs (flat key-value)
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json preview_url "https://..."
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json deployed_url "https://..."
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json github_repo_url "https://..."
+python {skill_dir}/scripts/check_manifest.py {project_root}/figma-to-code/manifest.json
+```
 
-# Mark steps done (appends to completed_steps array)
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json step "Step 1: Extract from Figma"
-``` 
+| Output | Action |
+|--------|--------|
+| `COMPLETE:<path>` | Done, return result |
+| `RESUME:building` | Skip to Step 6 |
+| `RESUME:extracted` | Skip to Step 3 |
+| `FRESH:*` | Start from Step 1 |
 
 ## Step 1: Extract from Figma
 
@@ -102,7 +80,7 @@ mcp__figma__export_node_images(file_key, node_ids, output_dir, format="svg", sca
 - All `<img>` tags need `alt` attributes
 - Photos below the fold get `loading="lazy"`
 
-Save tokens to `{project_root}/design_tokens.json`
+Save tokens to `{project_root}/figma-to-code/design_tokens.json`
 
 ## Step 2: Export Ground Truth
 
@@ -120,7 +98,7 @@ Write `ground_truth/manifest.json`:
 }
 ```
 
-Log progress: step done + record `figma_file_key` artifact.
+Update manifest: `python {skill_dir}/scripts/write_manifest.py {project_root}/figma-to-code/manifest.json extracted {figma_file_key}`
 
 ## Step 3: Visual Analysis
 
@@ -204,7 +182,7 @@ Creates project with correct Vite config (`base: './'` for GCS, `allowedHosts: t
 
 ## Step 6: Generate Components
 
-Log progress: mark step in_progress, add notes about components built/pending.
+Update manifest: `python {skill_dir}/scripts/write_manifest.py {project_root}/figma-to-code/manifest.json building`
 
 ### Performance Requirements
 
@@ -241,12 +219,13 @@ mcp__app_preview__create_app_preview(
     task_id=<task_id>,
     project_root="{project_root}"
 )
-# Returns: {"preview_url": "https://..."}
 ```
 
-Save to manifest:
+Creates a Modal sandbox running `npm run dev`. The preview URL is used by the verifier to take screenshots.
+
+Save the preview URL to manifest:
 ```bash
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json preview_url "<preview_url>"
+python {skill_dir}/scripts/write_manifest.py {project_root}/figma-to-code/manifest.json preview <preview_url>
 ```
 
 ### 7b: Push to GitHub
@@ -256,35 +235,15 @@ mcp__github__create_repository(name=<repo_name>, org="metaphi-agent")
 mcp__github__push_files(...)  # All generated files
 ```
 
-Save to manifest:
-```bash
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json github_repo_url "https://github.com/metaphi-agent/<repo_name>"
-```
-
-### 7c: Build & Deploy to GCS
+### 7c: Build for GCS Archive
 
 ```bash
 cd {project_root} && npm run build
 ```
 
-```python
-mcp__gcs_uploader__upload_dist_to_gcs(
-    local_path="{project_root}/dist",
-    gcs_prefix="figma-{agent_harness}-agent/{task_id}"
-)
-# Returns: {"url": "https://storage.googleapis.com/...", "success": true}
-```
+Creates `dist/` folder for permanent GCS static archive.
 
-Save to manifest:
-```bash
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json deployed_url "<url>"
-```
-
-### 7d: Mark Complete
-
-```bash
-python {skill_dir}/scripts/write_manifest.py {project_root}/manifest.json step "Step 7: Deploy & Push"
-```
+Update manifest: `python {skill_dir}/scripts/write_manifest.py {project_root}/figma-to-code/manifest.json complete {project_root}/dist`
 
 ## Multi-Turn Iteration
 

@@ -1,30 +1,26 @@
-import * as React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
 
-const DashboardPage = React.lazy(() => import('./pages/Dashboard'))
+const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 
-function Loading() {
+function AppShell() {
   return (
-    <div className="grid min-h-screen place-items-center bg-[color:var(--color-bg)]">
-      <div className="text-center">
-        <div className="text-2xl font-semibold text-[color:var(--color-text)]">
-          Loading…
-        </div>
-        <div className="mt-2 text-sm text-[color:var(--color-muted)]">
-          Preparing dashboard
-        </div>
-      </div>
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen items-center justify-center text-[var(--color-muted)]">
+            Loading…
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+        </Routes>
+      </Suspense>
     </div>
   )
 }
 
 export default function App() {
-  return (
-    <React.Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </React.Suspense>
-  )
+  return <AppShell />
 }

@@ -1,30 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
+/* Design tokens will be extracted from Figma */
 @theme {
-  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji";
 
-  /* Colors (extracted from Figma) */
-  --color-bg: #fafbfc; /* 0.9804, 0.9843, 0.9882 */
+  --color-bg: #fafbfc;
   --color-surface: #ffffff;
-  --color-border: #f8f9fb; /* 0.9725, 0.9765, 0.9804 */
-  --color-text: #151d48; /* 0.0824, 0.1137, 0.2824 */
-  --color-muted: #737791; /* 0.4510, 0.4667, 0.5686 */
-  --color-primary: #5d5ff0; /* 0.3647, 0.3725, 0.9373 */
-  --color-danger: #eb5757; /* close to "State Colors/Error" */
-  --color-success: #22c55e; /* supporting green */
+  --color-text: #151d48;
+  --color-muted: #737791;
+  --color-border: #f1f2f4;
+  --color-card-border: #f7f8fa;
+  --color-input: #f9fafb;
+  --color-primary: #5d5fef;
+  --color-warn-bg: #fff9f1;
+  --color-warn: #feaf6a;
+  --color-danger: #eb6b6b;
 
-  /* Shadows */
   --shadow-card: 0 4px 20px rgba(238, 238, 238, 0.5);
-}
-
-@layer base {
-  :root {
-    color-scheme: light;
-  }
+  --shadow-soft: 0 20px 50px rgba(55, 69, 87, 0.1);
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  color: var(--color-text);
 }
