@@ -4,7 +4,9 @@
   "completed_steps": [
     "Step 5: Scaffold Project",
     "Step 1: Extract from Figma",
-    "Step 2: Export Ground Truth"
+    "Step 2: Export Ground Truth",
+    "Step 6: Generate Components",
+    "Step 7: Deploy & Push"
   ],
   "figma_file_key": "rQRkgSps2QHY5QHqkSsLAT",
   "deployed_url": "https://storage.googleapis.com/metaphi-agent/figma-eval/6af7bf85-9f04-4737-8888-739b34cce9fe/index.html"
